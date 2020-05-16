@@ -37,6 +37,8 @@ export default class extends Controller {
   }
 
   setupLoadingState() {
+    // Subscribe to when loading state is enabled
+    // but wait 250ms before updating the DOM and displaying it
     this.isLoading
       .pipe(
         debounceTime(this.loadingDelay),
@@ -46,6 +48,8 @@ export default class extends Controller {
         this.loadingTarget.classList.remove('hidden');
       });
 
+    // Subscribe to when loading state is disabled
+    // and hide it immediately
     this.isLoading
       .pipe(
         filter(value => !value)
@@ -54,5 +58,5 @@ export default class extends Controller {
         this.loadingTarget.classList.add('hidden');
       });
   }
-  
+
 }
